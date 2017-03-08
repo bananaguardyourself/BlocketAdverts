@@ -4,7 +4,7 @@
 import React, {PropTypes, Component} from 'react'
 import AdvertController from './advertcontroller'
 
-var Advert = React.createClass({
+let Advert = React.createClass({
     propTypes: {
         advert: React.PropTypes.shape({
             id: React.PropTypes.number.isRequired,
@@ -79,7 +79,7 @@ export default class Adverts extends Component {
             <div className='bodyPane'>
                 {
                     fetching ?
-                        <p>Загрузка...</p>
+                        <p>Loading...</p>
                         :
                         null
                 }
