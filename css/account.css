@@ -1,0 +1,50 @@
+.signinFieldset
+{
+    padding-top: 10px;
+    border: 1px solid #001AAA;
+    color: #001AAA;
+    width: 330px;
+}
+
+.signinFieldsetError
+{
+    padding-top: 10px;
+    border: 1px solid Red;
+    color: #001AAA;
+    width: 330px;
+}
+
+.signinFieldset_paragraph
+{
+    margin: 2px 12px 10px 10px;
+}
+
+.textEntry
+{
+    display:block;
+    width: 320px;
+    border: 1px solid #001AAA;
+    color: #001AAA;
+}
+
+.submitButtonPanel
+{
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.captcha
+{
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.signinError
+{
+    color: Red;
+}
+
+.headerText
+{
+    font-size: 12px;
+}

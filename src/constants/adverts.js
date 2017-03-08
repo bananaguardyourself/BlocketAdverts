@@ -1,0 +1,6 @@
+/**
+ * Created by Ilya on 09.01.2017.
+ */
+export const GET_ADVERTS_REQUEST = 'GET_ADVERTS_REQUEST';
+export const GET_ADVERTS_SUCCESS = 'GET_ADVERTS_SUCCESS';
+export const GET_ADVERTS_FAIL = 'GET_ADVERTS_FAIL';

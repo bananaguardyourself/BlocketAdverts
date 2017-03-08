@@ -1,0 +1,41 @@
+{
+  "name": "advertUI",
+  "version": "1.0.0",
+  "description": "Blocket advert ui",
+  "main": "index.html",
+  "scripts": {
+    "start": "webpack-dev-server --inline --content-base --hot. --history-api-fallback"
+  },
+  "author": "Ilya Kurmaev",
+  "license": "Ilya Kurmaev",
+  "dependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-env": "^1.1.4",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-runtime": "^6.20.0",
+    "jquery": "^3.1.1",
+    "react": "^15.4.1",
+    "react-cookie": "^1.0.4",
+    "react-dom": "^15.4.1",
+    "react-recaptcha": "^2.2.6",
+    "react-redux": "^5.0.1",
+    "react-router": "^3.0.0",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
+    "wolfy87-eventemitter": "^5.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "eslint": "^3.12.2",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-react": "^6.8.0",
+    "react-hot-loader": "^1.3.1",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0"
+  }
+}

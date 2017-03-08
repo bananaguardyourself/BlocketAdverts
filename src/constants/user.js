@@ -1,0 +1,16 @@
+/**
+ * Created by Ilya on 15.01.2017.
+ */
+export const SIGNIN_REQUEST = 'SIGNIN_REQUEST';
+export const SIGNIN_SUCCES = 'SIGNIN_SUCCES';
+export const SIGNIN_FAIL = 'SIGNIN_FAIL';
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
+export const SIGNUP_SUCCES = 'SIGNUP_SUCCES';
+export const SIGNUP_FAIL = 'SIGNUP_FAIL';
+export const ERROR_SET = 'ERROR_SET';
+export const VERIFIED_SET = 'VERIFIED_SET';
+export const SIGNOUT_REQUEST = 'SIGNOUT_REQUEST';
+export const SIGNOUT_SUCCES = 'SIGNOUT_SUCCES';
+export const GET_USER_INFO_REQUEST = 'GET_USER_INFO_REQUEST';
+export const GET_USER_INFO_SUCCES = 'GET_USER_INFO_SUCCES';
+export const GET_USER_INFO_FAIL = 'GET_USER_INFO_FAIL';
