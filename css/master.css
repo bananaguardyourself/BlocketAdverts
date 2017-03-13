@@ -92,7 +92,7 @@ a img {
 }
 
 .advertName {
-    font-size: 12px;
+    font-size: 22px;
     font-style: normal;
     padding: 5px 10px 5px 10px;
     text-decoration: none;
@@ -101,19 +101,18 @@ a img {
 
 .advertData {
     padding-top: 5px;
-    width: 800px;
 }
 
 .advertPicture {
-    width: 90px;
-    height: 60px;
+    width: 135px;
+    height: 90px;
     border: 1px solid;
 }
 
 .advertTextData
 {
     float: right;
-    width: 400px;
+    width: 200px;
 }
 
 .advertLength {
@@ -128,12 +127,12 @@ a img {
 {
     padding-top: 5px;
     float: right;
-    width: 170px;
+    width: 15%;
 }
 
 .advertLinks
 {
     padding-top: 5px;
     float: right;
-    width: 300px;
+    width: 500px;
 }

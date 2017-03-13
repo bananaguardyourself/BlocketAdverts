@@ -20,7 +20,7 @@ class App extends Component {
         return (
             <div>
                 <Adverts adverts={adverts.adverts} fetching={adverts.fetching}
-                         error={adverts.error} advertActions = {advertsActions}/>
+                         error={adverts.error} advertActions = {advertsActions} deleteError={adverts.deleteError}/>
             </div>
         );
     }

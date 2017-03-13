@@ -1,17 +1,17 @@
 .commonBtn {
-     background: #f7f7f7;
-     background-image: -webkit-linear-gradient(top, #f7f7f7, #c7c7c7);
-     background-image: -moz-linear-gradient(top, #f7f7f7, #c7c7c7);
-     background-image: -ms-linear-gradient(top, #f7f7f7, #c7c7c7);
-     background-image: -o-linear-gradient(top, #f7f7f7, #c7c7c7);
-     background-image: linear-gradient(to bottom, #f7f7f7, #c7c7c7);
-     border-radius: 2px;
-     color: #001AAA;
-     font-size: 14px;
-     padding: 5px 15px 5px 15px;
-     border: solid #001AAA 1px;
-     text-decoration: none;
- }
+    background: #f7f7f7;
+    background-image: -webkit-linear-gradient(top, #f7f7f7, #c7c7c7);
+    background-image: -moz-linear-gradient(top, #f7f7f7, #c7c7c7);
+    background-image: -ms-linear-gradient(top, #f7f7f7, #c7c7c7);
+    background-image: -o-linear-gradient(top, #f7f7f7, #c7c7c7);
+    background-image: linear-gradient(to bottom, #f7f7f7, #c7c7c7);
+    border-radius: 2px;
+    color: #001AAA;
+    font-size: 14px;
+    padding: 5px 15px 5px 15px;
+    border: solid #001AAA 1px;
+    text-decoration: none;
+}
 
 .commonBtn:hover {
     background: #f7f7f7;
@@ -24,8 +24,8 @@
 }
 
 .commonBtn:active {
-    position:relative;
-    top:1px;
+    position: relative;
+    top: 1px;
 }
 
 .commonBtn:disabled {
@@ -34,91 +34,14 @@
 }
 
 .field {
-    display:flex;
-    width:100%;
+    display: flex;
+    width: 100%;
 }
 
-.advertLinkAdd
-{
+.advertLinkAdd {
     width: 840px;
     border: 1px solid #001AAA;
     color: #001AAA;
     margin-right: 10px;
     font-size: 22px;
-}
-
-.buttonAdd {
-    outline: none;
-    height: 40px;
-    text-align: center;
-    width: 130px;
-    border-radius: 40px;
-    background: #fff;
-    border: 2px solid #001AAA;
-    color: #001AAA;
-    letter-spacing: 1px;
-    text-shadow: 0;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    -webkit-transition: all 0.25s ease;
-    transition: all 0.25s ease;
-}
-.buttonAdd:hover {
-    color: white;
-    background: #001AAA;
-}
-.buttonAdd:active {
-    letter-spacing: 2px;
-}
-.buttonAdd:after {
-    content: "ADD";
-}
-
-.onclic {
-    width: 40px;
-    border-color: #bbbbbb;
-    border-width: 3px;
-    font-size: 0;
-    border-left-color: #001AAA;
-    -webkit-animation: rotating 2s 0.25s linear infinite;
-    animation: rotating 2s 0.25s linear infinite;
-}
-.onclic:after {
-    content: "";
-}
-.onclic:hover {
-    color: #001AAA;
-    background: white;
-}
-
-.validate {
-    font-size: 13px;
-    color: white;
-    background: #001AAA;
-}
-.validate:after {
-    content: "OK";
-}
-
-@-webkit-keyframes rotating {
-    from {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes rotating {
-    from {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
 }
