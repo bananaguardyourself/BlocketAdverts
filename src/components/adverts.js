@@ -100,7 +100,7 @@ let Advert = React.createClass({
                             <div className='advertLength'>{advertPrice} :-</div> }
                     </div>
                     <div className='advertPicture'>
-                        <img src={advertPicture} width='100%' height='100%'/>
+                        <img src={advertPicture+'?'+Math.random()} width='100%' height='100%'/>
                     </div>
                 </div>
             </div>
