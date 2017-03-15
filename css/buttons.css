@@ -1,0 +1,291 @@
+/*Button Link*/
+.button-link {
+    border-radius: 4px;
+    background-color: #fff;
+    border: 2px solid #001AAA;
+    padding: 10px;
+    width: 140px;
+    height: 40px;
+    transition: all 0.4s;
+    color: #001AAA;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px 0 5px;
+}
+
+.button-link span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+}
+
+.button-link span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.4s;
+}
+
+.button-link:hover span {
+    padding-right: 25px;
+}
+
+.button-link:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.link-onclick {
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+    border: #bbbbbb solid 3px;
+    font-size: 12px;
+    border-left-color: #001AAA;
+    -webkit-animation: rotating 2s 0.4s linear infinite;
+    animation: rotating 2s 0.4s linear infinite;
+    margin: 0 55px 0 55px;
+}
+
+.link-onclick span:after {
+    content: "";
+}
+
+.link-onclick:hover {
+    color: #001AAA;
+    background: white;
+}
+
+.deleteError {
+    font-size: 12px;
+    color: white;
+    background: #aa0300;
+    border-color: #bbbbbb;
+    transition: 0s;
+}
+
+.deleteError span:after {
+    content: "FAIL";
+    opacity: 1;
+    display: inline-block;
+    position: relative;
+    right: 0;
+    color: white;
+    transition: 0s;
+}
+
+.deleteError:hover span {
+    padding-right: 0;
+}
+
+.updateOk {
+    font-size: 12px;
+    color: white;
+    background: #001AAA;
+    transition: 0s;
+}
+
+.updateOk span:after {
+    content: "OK";
+    opacity: 1;
+    display: inline-block;
+    position: relative;
+    right: 0;
+    color: white;
+    transition: 0s;
+}
+
+.updateOk:hover span {
+    padding-right: 0;
+}
+
+/*Button delete*/
+.button-delete {
+    position: relative;
+    background-color: #f30010;
+    border: none;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-delete:hover {
+    background: #fff;
+    box-shadow: 0 2px 10px 5px #97B1BF;
+    color: #000;
+}
+
+.button-delete:after {
+    content: "";
+    background: #f1c40f;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button-delete:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+/*Button Add*/
+.buttonAdd {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 140px;
+    padding: 10px;
+    border-radius: 4px;
+    background: #fff;
+    border: 2px solid #001AAA;
+    color: #001AAA;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.buttonAdd:active {
+    letter-spacing: 2px;
+}
+
+.buttonAdd span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s ease;
+}
+
+.buttonAdd span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.4s ease;
+}
+
+.buttonAdd:hover span {
+    padding-right: 25px;
+}
+
+.buttonAdd:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.onclic {
+    border-radius: 40px;
+    width: 40px;
+    border: #bbbbbb solid 3px;
+    font-size: 0;
+    border-left-color: #001AAA;
+    -webkit-animation: rotating 2s 0.4s linear infinite;
+    animation: rotating 2s 0.4s linear infinite;
+    margin: 0 55px 0 55px;
+}
+
+.onclic span:after {
+    content: "";
+}
+
+.onclic:hover {
+    color: #001AAA;
+    background: white;
+}
+
+.validate {
+    font-size: 12px;
+    color: white;
+    background: #001AAA;
+}
+
+.validate span:after {
+    content: "OK";
+    opacity: 1;
+    display: inline-block;
+    position: relative;
+    right: 0;
+}
+
+.validate:hover span {
+    padding-right: 0;
+}
+
+.notvalidate {
+    font-size: 12px;
+    color: white;
+    background: #aa0300;
+    border-color: #bbbbbb;
+    transition: 0s;
+}
+
+.notvalidate span:after {
+    content: "FAIL";
+    opacity: 1;
+    display: inline-block;
+    position: relative;
+    right: 0;
+    transition: 0s;
+}
+
+.notvalidate:hover span {
+    padding-right: 0;
+}
+
+.finished span:after {
+    opacity: 0;
+    transition: 0s;
+}
+
+.finished:hover span:after {
+    content: "";
+}
+
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
