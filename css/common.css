@@ -45,3 +45,11 @@
     margin-right: 10px;
     font-size: 22px;
 }
+
+.confirmdelete {
+    color: #001AAA;
+}
+
+.confirmHeader{
+    text-align: center;
+}

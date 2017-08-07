@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import Adverts from '../components/adverts'
 import * as advertsActions from '../actions/AdvertsActions'
+import * as sortingActions from '../actions/SortingActions'
+import { getSortedAdverts } from '../selectors'
 
 class App extends Component {
 
@@ -15,12 +17,13 @@ class App extends Component {
     }
 
     render() {
-        const {adverts, advertsActions} = this.props;
+        const {adverts, advertsActions, sorting, sortingActions} = this.props;
 
         return (
             <div>
                 <Adverts adverts={adverts.adverts} fetching={adverts.fetching}
-                         error={adverts.error} advertActions = {advertsActions} deleteError={adverts.deleteError}/>
+                         error={adverts.error} advertActions = {advertsActions} deleteConfirmation={adverts.deleteConfirmation}
+                         sortingActions={sortingActions} sorting={sorting}/>
             </div>
         );
     }
@@ -28,13 +31,15 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        adverts: state.adverts
+        adverts: getSortedAdverts(state),
+        sorting: state.sorting
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        advertsActions: bindActionCreators(advertsActions, dispatch)
+        advertsActions: bindActionCreators(advertsActions, dispatch),
+        sortingActions: bindActionCreators(sortingActions, dispatch)
     }
 }
 

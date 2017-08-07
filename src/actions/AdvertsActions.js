@@ -5,13 +5,18 @@ import {
     GET_ADVERTS_REQUEST,
     GET_ADVERTS_SUCCESS,
     GET_ADVERTS_FAIL,
-    ADD_ADVERTS_REQUEST,
-    ADD_ADVERTS_SUCCESS,
-    ADD_ADVERTS_FAIL,
+    ADD_ADVERT_REQUEST,
+    ADD_ADVERT_SUCCESS,
+    ADD_ADVERT_FAIL,
     DELETE_ADVERT_REQUEST,
     DELETE_ADVERT_FAIL,
     DELETE_ADVERT_SUCCESS,
-    DELETE_ADVERT_RESET
+    DELETE_ADVERT_RESET,
+    UPDATE_ADVERT_REQUEST,
+    UPDATE_ADVERT_FAIL,
+    UPDATE_ADVERT_SUCCESS,
+    SHOW_DELETE_CONFIRMATION,
+    CLOSE_DELETE_CONFIRMATION
 } from '../constants/adverts'
 
 import {
@@ -90,14 +95,14 @@ export function addAdvert(link, successCallback, errorCallback) {
     return (dispatch) => {
 
         dispatch({
-            type: ADD_ADVERTS_REQUEST
+            type: ADD_ADVERT_REQUEST
         });
 
         let tk = cookie.load('tk');
 
         if (!tk) {
             dispatch({
-                type: ADD_ADVERTS_FAIL,
+                type: ADD_ADVERT_FAIL,
                 payload: 'Unauthorized'
             });
 
@@ -125,7 +130,7 @@ export function addAdvert(link, successCallback, errorCallback) {
                         headers: {'Authorization': tk},
                         success: function (response) {
                             dispatch({
-                                type: ADD_ADVERTS_SUCCESS,
+                                type: ADD_ADVERT_SUCCESS,
                                 payload: response
                             });
                             successCallback();
@@ -134,7 +139,7 @@ export function addAdvert(link, successCallback, errorCallback) {
 
                             if (result.statusCode === 401) {
                                 dispatch({
-                                    type: ADD_ADVERTS_FAIL,
+                                    type: ADD_ADVERT_FAIL,
                                     payload: 'Unauthorized'
                                 });
 
@@ -149,7 +154,7 @@ export function addAdvert(link, successCallback, errorCallback) {
                             }
                             else {
                                 dispatch({
-                                    type: ADD_ADVERTS_FAIL,
+                                    type: ADD_ADVERT_FAIL,
                                     payload: result.responseJSON.message
                                 })
                             }
@@ -160,7 +165,7 @@ export function addAdvert(link, successCallback, errorCallback) {
 
                     if (result.statusCode === 401) {
                         dispatch({
-                            type: ADD_ADVERTS_FAIL,
+                            type: ADD_ADVERT_FAIL,
                             payload: 'Unauthorized'
                         });
 
@@ -174,7 +179,7 @@ export function addAdvert(link, successCallback, errorCallback) {
                     }
                     else {
                         dispatch({
-                            type: ADD_ADVERTS_FAIL,
+                            type: ADD_ADVERT_FAIL,
                             payload: result.responseJSON.message
                         })
                     }
@@ -186,7 +191,7 @@ export function addAdvert(link, successCallback, errorCallback) {
     }
 }
 
-export function deleteAdvert(id) {
+export function deleteAdvert(id, errorCallback) {
     return (dispatch) => {
 
         dispatch({
@@ -243,6 +248,8 @@ export function deleteAdvert(id) {
                             payload: result.statusText
                         })
                     }
+
+                    errorCallback();
                 }
             });
 
@@ -250,12 +257,99 @@ export function deleteAdvert(id) {
     }
 }
 
-export function resetDelete()
-{
+export function resetDelete() {
     return (dispatch) => {
 
         dispatch({
             type: DELETE_ADVERT_RESET
+        });
+    }
+}
+
+export function updateAdvert(id, successCallback, errorCallback) {
+    return (dispatch) => {
+
+        dispatch({
+            type: UPDATE_ADVERT_REQUEST
+        });
+
+        let tk = cookie.load('tk');
+
+        if (!tk) {
+            dispatch({
+                type: UPDATE_ADVERT_FAIL,
+                payload: 'Unauthorized'
+            });
+
+            dispatch({
+                type: ROUTING,
+                payload: {
+                    method: 'replace', //or push
+                    nextUrl: '/signin'
+                }
+            })
+        }
+        else {
+
+            $.ajax({
+                method: 'PUT',
+                url: 'http://35.156.176.72/adverts/' + id,
+                headers: {'Authorization': tk},
+                success: function (result) {
+
+                    dispatch({
+                        type: UPDATE_ADVERT_SUCCESS,
+                        id: id,
+                        payload: result
+                    });
+
+                    successCallback();
+                },
+                error: function (result) {
+
+                    if (result.statusCode === 401) {
+                        dispatch({
+                            type: UPDATE_ADVERT_FAIL,
+                            payload: 'Unauthorized'
+                        });
+
+                        dispatch({
+                            type: ROUTING,
+                            payload: {
+                                method: 'replace', //or push
+                                nextUrl: '/signin'
+                            }
+                        })
+                    }
+                    else {
+                        dispatch({
+                            type: UPDATE_ADVERT_FAIL,
+                            payload: result.statusText
+                        })
+                    }
+
+                    errorCallback();
+                }
+            });
+
+        }
+    }
+}
+
+export function showDeleteConfirmation() {
+    return (dispatch) => {
+
+        dispatch({
+            type: SHOW_DELETE_CONFIRMATION
+        });
+    }
+}
+
+export function closeDeleteConfirmation() {
+    return (dispatch) => {
+
+        dispatch({
+            type: CLOSE_DELETE_CONFIRMATION
         });
     }
 }

@@ -32,7 +32,6 @@ export default class AdvertController extends Component {
                 this.addBtn.className = 'buttonAdd notvalidate';
                 this.callback(this.finishedFunction.bind(this));
             }.bind(this))
-
     }
 
     callback(finished) {

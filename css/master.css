@@ -4,7 +4,7 @@ html, body {
     padding: 0;
     margin: 0;
     font-family: Arial, Verdana, Helvetica;
-    background: #f7f7f7;
+    background: #ffffff;
     font-size: 12px;
 }
 
@@ -13,7 +13,7 @@ a img {
 }
 
 .bodyPane {
-    background: #f7f7f7;
+    background: #ffffff;
     color: #001AAA;
     padding: 20px 0 20px 0;
     min-height: 600px;
@@ -22,7 +22,7 @@ a img {
 .masterPage {
     position: relative;
     min-height: 100%;
-    background: #f7f7f7;
+    background: #ffffff;
     width: 990px;
     margin: 0 auto;
     text-align: left;
@@ -33,11 +33,10 @@ a img {
     margin-top: 20px;
     position: relative;
     margin-bottom: 0;
-    border-bottom: 1px solid #eaeaea;
 }
 
 .masterHeader_logo {
-    background: #f7f7f7;
+    background: #ffffff;
     height: 100px;
 }
 
@@ -112,7 +111,7 @@ a img {
 .advertTextData
 {
     float: right;
-    width: 200px;
+    width: 170px;
 }
 
 .advertLength {
@@ -127,7 +126,7 @@ a img {
 {
     padding-top: 5px;
     float: right;
-    width: 15%;
+    width: 180px;
 }
 
 .advertLinks
