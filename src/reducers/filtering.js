@@ -2,23 +2,23 @@
  * Created by Ilya on 05.08.2017.
  */
 import {
-    GET_ADVERTS_FILTER,
-    SET_ADVERTS_FILTER
+    SET_FILTER_CLOSED,
+    SET_FILTER_DATE,
+    FILTERING_DATE_ALL
 } from '../constants/filtering'
 
 const initialState = {
-    closed: false
+    showClosed: false,
+    dateFilter: FILTERING_DATE_ALL
 };
 
 export default function filtering(state = initialState, action) {
 
     switch (action.type) {
-        case GET_ADVERTS_FILTER:
-            return {...state, closed: action.payload.closed, sorting: action.payload.sorting};
-
-        case SET_ADVERTS_FILTER:
-            return {...state, closed: action.payload.closed, sorting: action.payload.sorting};
-
+        case SET_FILTER_CLOSED:
+            return {...state, showClosed: action.payload};
+        case SET_FILTER_DATE:
+            return {...state, dateFilter: action.payload};
         default:
             return state;
     }

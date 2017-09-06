@@ -7,23 +7,26 @@ import {connect} from 'react-redux'
 import Adverts from '../components/adverts'
 import * as advertsActions from '../actions/AdvertsActions'
 import * as sortingActions from '../actions/SortingActions'
-import { getSortedAdverts } from '../selectors'
+import * as filteringActions from '../actions/FilteringActions'
+import {getSortedFilteredAdverts} from '../selectors'
 
 class App extends Component {
 
-    componentWillMount(){
+    componentWillMount() {
         const {getAdverts} = this.props.advertsActions;
         getAdverts();
     }
 
     render() {
-        const {adverts, advertsActions, sorting, sortingActions} = this.props;
+        const {adverts, advertsActions, sorting, sortingActions, filtering, filteringActions} = this.props;
 
         return (
             <div>
                 <Adverts adverts={adverts.adverts} fetching={adverts.fetching}
-                         error={adverts.error} advertActions = {advertsActions} deleteConfirmation={adverts.deleteConfirmation}
-                         sortingActions={sortingActions} sorting={sorting}/>
+                         error={adverts.error} advertActions={advertsActions}
+                         deleteConfirmation={adverts.deleteConfirmation}
+                         sortingActions={sortingActions} sorting={sorting} filteringActions={filteringActions}
+                         filtering={filtering}/>
             </div>
         );
     }
@@ -31,15 +34,17 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        adverts: getSortedAdverts(state),
-        sorting: state.sorting
+        adverts: getSortedFilteredAdverts(state),
+        sorting: state.sorting,
+        filtering: state.filtering
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         advertsActions: bindActionCreators(advertsActions, dispatch),
-        sortingActions: bindActionCreators(sortingActions, dispatch)
+        sortingActions: bindActionCreators(sortingActions, dispatch),
+        filteringActions: bindActionCreators(filteringActions, dispatch)
     }
 }
 

@@ -24,8 +24,7 @@ const initialState = {
     fetching: false,
     error: '',
     deleteError: false,
-    deleteConfirmation: false,
-    filter: false
+    deleteConfirmation: false
 };
 
 export default function adverts(state = initialState, action) {

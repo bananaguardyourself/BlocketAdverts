@@ -135,3 +135,83 @@ a img {
     float: right;
     width: 500px;
 }
+
+.filter {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px; /*border-bottom: 1px solid #FFFFFF;*/
+}
+
+.filter a:link
+{
+    text-decoration: none;
+    color: #001AAA;
+}
+
+.filter a:visited
+{
+    text-decoration: none;
+    color: #001AAA;
+}
+
+.filter a:hover
+{
+    text-decoration: none;
+    color: #001AAA;
+}
+
+.closedfilter {
+    margin-top: 10px;
+    transition: all 0.4s;
+    color: #001AAA;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-family: Arial;
+}
+
+.combofilter {
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #001AAA;
+    padding: 10px;
+    transition: all 0.4s;
+    color: #001AAA;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 12px;
+    margin: 0 5px 0 5px;
+    font-family: Arial;
+}
+
+.combofilter option{
+    border: 2px solid #001AAA;
+}
+
+.selected-image{
+    height: 500px;
+}
+
+.selected-image:hover {
+    cursor: pointer;
+}
+
+.image-thumbnail{
+    justify-content: space-around;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+.image-thumbnail img {
+    width: 70px;
+    height: 70px;
+    padding: 1px;
+    border: 1px solid grey;
+}
+
+.image-thumbnail div {
+    display: inline;
+}
+
+.image-thumbnail:hover {
+    cursor: pointer;
+}
