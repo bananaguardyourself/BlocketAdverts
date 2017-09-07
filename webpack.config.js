@@ -13,17 +13,19 @@ module.exports = {
     },
 
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loaders: ['eslint']
-            }
-        ],
-        loaders: [
+                loader: 'eslint-loader',
+                enforce: 'pre',
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ['react-hot', 'babel-loader?presets[]=stage-0&presets[]=env&presets[]=react']
+                loader: 'babel-loader',
+                options: {
+                    presets: ['stage-0', 'env', 'react']
+                }
             }
         ]
     },

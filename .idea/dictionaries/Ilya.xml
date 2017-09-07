@@ -4,8 +4,12 @@
       <w>advertdetails</w>
       <w>advertdetailsactions</w>
       <w>advertsfilter</w>
+      <w>eslint</w>
       <w>fieldset</w>
       <w>masterpage</w>
+      <w>polyfill</w>
+      <w>signin</w>
+      <w>signup</w>
       <w>yyyy</w>
     </words>
   </dictionary>

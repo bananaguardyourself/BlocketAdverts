@@ -14,13 +14,13 @@ export default class Signup extends Component {
         this.props.verifiedSet(false)
     }
 
-    onLoadCallback() {
+    static onLoadCallback() {
         console.log('Done!!!!');
     }
 
     onSignUpBtnClick() {
         if (this.txtEmail.value != '' && this.txtPassword.value != '' && this.txtPasswordRepeat.value != '') {
-            var re = /([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})/;
+            const re = /([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})/;
             if (re.test(this.txtEmail.value)) {
                 this.props.handleSignup(this.txtEmail.value, this.txtPassword.value, this.txtPasswordRepeat.value)
             }
