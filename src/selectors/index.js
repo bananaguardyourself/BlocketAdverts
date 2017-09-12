@@ -32,6 +32,7 @@ const getFilteredAdverts = createSelector(
             error: adverts.error,
             deleteError: adverts.deleteError,
             deleteConfirmation: adverts.deleteConfirmation,
+            selectedId: adverts.selectedId,
             filter: adverts.filter
         };
 

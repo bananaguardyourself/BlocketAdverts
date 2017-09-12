@@ -31,7 +31,6 @@ export default class Photos extends Component {
         let images = this.props.pictures;
         return (
             <div>
-                <h2> Images </h2>
                 <div className='selected-image'>
                     <div key='0'>
                         {images[0] ? <img src={images[0]} ref={img => this.bigImage = img}

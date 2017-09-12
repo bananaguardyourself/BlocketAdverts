@@ -195,7 +195,8 @@ export function deleteAdvert(id, errorCallback) {
     return (dispatch) => {
 
         dispatch({
-            type: DELETE_ADVERT_REQUEST
+            type: DELETE_ADVERT_REQUEST,
+            payload: id
         });
 
         let tk = cookie.load('tk');
@@ -336,11 +337,12 @@ export function updateAdvert(id, successCallback, errorCallback) {
     }
 }
 
-export function showDeleteConfirmation() {
+export function showDeleteConfirmation(id) {
     return (dispatch) => {
 
         dispatch({
-            type: SHOW_DELETE_CONFIRMATION
+            type: SHOW_DELETE_CONFIRMATION,
+            payload: id
         });
     }
 }

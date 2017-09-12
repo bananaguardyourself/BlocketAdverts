@@ -19,29 +19,24 @@ const customStyles = {
 
 export default class Advert extends Component {
 
-
     onLinkClick() {
         window.open(this.props.advert.link, '_blank');
     }
-
 
     onCancelDeleteClick() {
         this.props.advertActions.closeDeleteConfirmation();
         this.deleteButton.removeAttribute('disabled');
     }
 
-
     onDeleteClick() {
-        this.props.advertActions.showDeleteConfirmation();
+        this.props.advertActions.showDeleteConfirmation(this.props.advert.id);
     }
-
 
     onConfirmDeleteClick() {
         this.props.advertActions.closeDeleteConfirmation();
-        this.props.advertActions.deleteAdvert(::this.props.advert.id, ::this.loaderDelete);
+        this.props.advertActions.deleteAdvert(this.props.advert.id, this.loaderDelete);
         this.deleteButton.setAttribute('disabled', 'disabled');
     }
-
 
     loaderDelete() {
         setTimeout(function () {
@@ -53,7 +48,6 @@ export default class Advert extends Component {
         }, 500);
     }
 
-
     setErrorDelete(callbackFunction) {
         setTimeout(function () {
             if (this.deleteButton !== null) {
@@ -62,7 +56,6 @@ export default class Advert extends Component {
             }
         }, 1000);
     }
-
 
     callbackDelete(finishedFunction) {
         setTimeout(function () {
@@ -74,8 +67,7 @@ export default class Advert extends Component {
         }, 1700);
     }
 
-
-    finishedDelete() {
+    static finishedDelete() {
         setTimeout(function () {
             if (this.deleteButton !== null) {
                 this.deleteButton.className = 'button-link';
@@ -83,7 +75,6 @@ export default class Advert extends Component {
             }
         }, 400);
     }
-
 
     onUpdateClick() {
         this.updateSpan.textContent = '';
@@ -132,7 +123,6 @@ export default class Advert extends Component {
         }.bind(this), 400);
     }
 
-
     render() {
         let advertId = this.props.advert.id;
         let advertName = this.props.advert.name;
@@ -144,6 +134,7 @@ export default class Advert extends Component {
         let advertUpdated = this.props.advert.lastUpdate;
         let advertOldPrices = this.props.advert.oldPrices;
         let deleteConfirmation = this.props.deleteConfirmation;
+        let selectedId = this.props.selectedId;
         return (
             <div className='advert'>
                 <div className='advertName'>{advertName}</div>
@@ -165,7 +156,7 @@ export default class Advert extends Component {
                     <div className='advertTextData'>
                         <div className='advertLength'>{advertLength} ft</div>
                         {advertOldPrices.length > 0 ? <div className='advertLength'>{advertPrice} :-
-                                - Previous price({advertOldPrices[advertOldPrices.length - 1]} :-)</div> :
+                                <br/> was {advertOldPrices[advertOldPrices.length - 1]} :-</div> :
                             <div className='advertLength'>{advertPrice} :-</div> }
                     </div>
                     <div className='advertPicture'>
@@ -175,7 +166,7 @@ export default class Advert extends Component {
                     </div>
                 </div>
                 <Modal
-                    isOpen={deleteConfirmation}
+                    isOpen={deleteConfirmation && selectedId === advertId}
                     style={customStyles}
                     contentLabel='deleteConfirmationModal'
                 >
@@ -209,6 +200,7 @@ Advert.propTypes = {
         dateClosed: React.PropTypes.string
     }),
     deleteConfirmation: React.PropTypes.bool.isRequired,
+    selectedId: React.PropTypes.number.isRequired,
     advertActions: React.PropTypes.shape({
         deleteAdvert: React.PropTypes.func.isRequired,
         updateAdvert: React.PropTypes.func.isRequired,

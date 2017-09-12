@@ -2,7 +2,20 @@
  * Created by Ilya on 21.08.2017.
  */
 import React, {Component} from 'react'
+import Modal from 'react-modal'
 import Photos from './photos'
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        border: 'solid #001AAA 1px'
+    }
+};
 
 export default class AdvertDetails extends Component {
 
@@ -16,6 +29,59 @@ export default class AdvertDetails extends Component {
         window.open(this.props.advert.link, '_blank');
     }
 
+    onCancelDeleteClick() {
+        this.props.advertactions.closeDeleteConfirmation();
+        this.deleteButton.removeAttribute('disabled');
+    }
+
+    onDeleteClick() {
+        this.props.advertactions.showDeleteConfirmation();
+    }
+
+    onConfirmDeleteClick() {
+        this.props.advertactions.closeDeleteConfirmation();
+        this.props.advertactions.deleteAdvert(this.props.advert.id, this.loaderDelete);
+        this.deleteButton.setAttribute('disabled', 'disabled');
+    }
+
+    static loaderDelete() {
+        setTimeout(function () {
+            if (this.deleteSpan !== null) {
+                this.deleteSpan.textContent = '';
+                this.deleteButton.className = 'button-link link-onclick';
+                this.setErrorDelete(this.callbackDelete)
+            }
+        }, 500);
+    }
+
+    setErrorDelete(callbackFunction) {
+        setTimeout(function () {
+            if (this.deleteButton !== null) {
+                this.deleteButton.className = 'button-link deleteError';
+                callbackFunction(this.finishedDelete);
+            }
+        }, 1000);
+    }
+
+    callbackDelete(finishedFunction) {
+        setTimeout(function () {
+            if (this.deleteButton !== null) {
+                this.deleteButton.className = 'button-link finished';
+                this.deleteButton.removeAttribute('disabled');
+                finishedFunction();
+            }
+        }, 1700);
+    }
+
+    static finishedDelete() {
+        setTimeout(function () {
+            if (this.deleteButton !== null) {
+                this.deleteButton.className = 'button-link';
+                this.deleteSpan.textContent = 'Delete';
+            }
+        }, 400);
+    }
+
     onUpdateClick() {
         this.updateSpan.textContent = '';
         this.updateButton.className = 'button-link link-onclick';
@@ -25,7 +91,7 @@ export default class AdvertDetails extends Component {
 
     loaderUpdate() {
         setTimeout(function () {
-            this.props.advertActions.updateAdvert(this.props.advert.id, ::this.setOkUpdate, ::this.setErrorUpdate);
+            this.props.advertactions.updateAdvert(this.props.advert.id, ::this.setOkUpdate, ::this.setErrorUpdate);
         }.bind(this), 700);
     }
 
@@ -65,21 +131,69 @@ export default class AdvertDetails extends Component {
         let advertClosed = this.props.advert.dateClosed;
         let advertUpdated = this.props.advert.lastUpdate;
         let advertPictures = this.props.advert.pictures;
+        let advertLength = this.props.advert.length;
+        let advertPrice = this.props.advert.currentPrice;
+        let deleteConfirmation = this.props.advert.deleteConfirmation;
+        let deleted = this.props.advert.deleted;
+
         return (
-            <div className='advert'>
-                <div className='advertName'>{advertName}</div>
-                <Photos pictures={advertPictures}/>
-                <div className='advertDateValues'>
-                    <div>Added: {advertOpen}</div>
-                    <div>Checked: {advertUpdated}</div>
-                    {advertClosed ? <div> Closed: {advertClosed} </div> : null}
-                </div>
-                <div className='advertLinks'>
-                    <button className='button-link' onClick={::this.onLinkClick}><span>To Blocket</span></button>
-                    <button className='button-link' ref={button => this.updateButton = button}
-                            onClick={::this.onUpdateClick}><span ref={span => this.updateSpan = span }>Update</span>
-                    </button>
-                </div>
+            <div className='bodyPane'>
+                {deleted ?
+                    <div className='advert'>
+                        <div className='advertName'>{advertName}</div>
+                        <div className='detailsMain'>
+                            <div className='detailsLength'>{advertLength} ft</div>
+                            <div className='detailsLength'>{advertPrice} :-</div>
+                            <div className='detailsDateValues'>
+                                <div>Added: {advertOpen} Checked: {advertUpdated} {advertClosed ?
+                                    <span> Closed: {advertClosed} </span> : null}</div>
+                            </div>
+                        </div>
+                        <h1>DELETED</h1>
+                    </div>
+                    :
+                    <div className='advert'>
+                        <div className='advertName'>{advertName}</div>
+                        <div className='detailsMain'>
+                            <div className='detailsLength'>{advertLength} ft</div>
+                            <div className='detailsLength'>{advertPrice} :-</div>
+                            <div className='detailsDateValues'>
+                                <div>Added: {advertOpen} Checked: {advertUpdated} {advertClosed ?
+                                    <span> Closed: {advertClosed} </span> : null}</div>
+                            </div>
+                        </div>
+                        <Photos pictures={advertPictures}/>
+                        <div className='detailsButtons'>
+                            <button className='button-link' onClick={::this.onLinkClick}><span>To Blocket</span>
+                            </button>
+                            <button className='button-link' ref={button => this.updateButton = button}
+                                    onClick={::this.onUpdateClick}><span
+                                ref={span => this.updateSpan = span }>Update</span>
+                            </button>
+                            <button className='button-link' ref={button => this.deleteButton = button}
+                                    onClick={::this.onDeleteClick}><span
+                                ref={span => this.deleteSpan = span}>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                }
+                <Modal
+                    isOpen={deleteConfirmation}
+                    style={customStyles}
+                    contentLabel='deleteConfirmationModal'
+                >
+                    <div className='confirmdelete'>
+                        <h2 className='confirmHeader'>Are you sure you want <br/> do delete this advert?</h2>
+                        <button className='button-link'
+                                onClick={::this.onCancelDeleteClick}><span
+                            ref={span => this.updateSpan = span }>Cancel</span>
+                        </button>
+                        <button className='button-link'
+                                onClick={::this.onConfirmDeleteClick}><span
+                            ref={span => this.deleteSpan = span}>Delete</span>
+                        </button>
+                    </div>
+                </Modal>
             </div>
         )
     }
@@ -96,9 +210,16 @@ AdvertDetails.propTypes = {
         lastUpdate: React.PropTypes.string.isRequired,
         picture: React.PropTypes.string.isRequired,
         dateClosed: React.PropTypes.string,
-        pictures: React.PropTypes.array
+        pictures: React.PropTypes.array,
+        deleteConfirmation: React.PropTypes.bool.isRequired
     }),
     advertdetailsactions: React.PropTypes.shape({
-        getAdvert: React.PropTypes.func.isRequired
+        getAdvert: React.PropTypes.func.isRequired,
+    }),
+    advertactions: React.PropTypes.shape({
+        deleteAdvert: React.PropTypes.func.isRequired,
+        updateAdvert: React.PropTypes.func.isRequired,
+        showDeleteConfirmation: React.PropTypes.func.isRequired,
+        closeDeleteConfirmation: React.PropTypes.func.isRequired
     })
 };

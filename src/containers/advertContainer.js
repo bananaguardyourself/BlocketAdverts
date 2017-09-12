@@ -5,15 +5,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import AdvertDetails from '../components/advertdetails'
-import * as advertdetailsActions from '../actions/advertdetailsactions'
+import * as advertdetailsActions from '../actions/AdvertDetailsActions'
+import * as advertsActions from '../actions/AdvertsActions'
 
 class AdvertContainer extends Component {
     render() {
-        const {advert, advertdetailsActions, params} = this.props;
+        const {advert, advertdetailsActions, advertsActions, params} = this.props;
 
         return (
             <div>
-                <AdvertDetails advert = {advert} advertdetailsactions = {advertdetailsActions} params = {params}/>
+                <AdvertDetails advert = {advert} advertdetailsactions = {advertdetailsActions} advertactions={advertsActions} params = {params}/>
             </div>
         );
     }
@@ -21,6 +22,7 @@ class AdvertContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
+        advertsActions: bindActionCreators(advertsActions, dispatch),
         advertdetailsActions: bindActionCreators(advertdetailsActions, dispatch)
     }
 }

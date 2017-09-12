@@ -4,7 +4,13 @@
 import {
     GET_ADVERT_DETAILS_REQUEST,
     GET_ADVERT_DETAILS_SUCCESS,
-    GET_ADVERT_DETAILS_FAIL
+    GET_ADVERT_DETAILS_FAIL,
+    DELETE_ADVERT_REQUEST,
+    DELETE_ADVERT_SUCCESS,
+    DELETE_ADVERT_FAIL,
+    DELETE_ADVERT_RESET,
+    SHOW_DELETE_CONFIRMATION,
+    CLOSE_DELETE_CONFIRMATION
 } from '../constants/adverts'
 
 const initialState = {
@@ -20,7 +26,10 @@ const initialState = {
     pictures: [],
     oldPrices: [],
     description: '',
-    error: ''
+    error: '',
+    deleteError: false,
+    deleteConfirmation: false,
+    deleted: false
 };
 
 export default function advertdetails(state = initialState, action) {
@@ -30,7 +39,8 @@ export default function advertdetails(state = initialState, action) {
             return {...state, error: ''};
 
         case GET_ADVERT_DETAILS_SUCCESS:
-            return {...state,
+            return {
+                ...state,
                 id: action.payload.id,
                 link: action.payload.link,
                 name: action.payload.name,
@@ -43,10 +53,32 @@ export default function advertdetails(state = initialState, action) {
                 pictures: action.payload.pictures,
                 oldPrices: action.payload.oldPrices,
                 description: action.payload.description,
-                error: ''};
+                error: '',
+                deleted: false
+            };
 
         case GET_ADVERT_DETAILS_FAIL:
             return {...state, error: action.payload};
+
+        case DELETE_ADVERT_REQUEST:
+            return {...state, deleteError: false};
+
+        case DELETE_ADVERT_FAIL:
+            return {...state, deleteError: true, error: action.payload, deleted: false};
+
+        case DELETE_ADVERT_SUCCESS:
+            return {...state, deleteError: false, deleted: true};
+
+        case DELETE_ADVERT_RESET:
+            return {...state, deleteError: false};
+
+        case SHOW_DELETE_CONFIRMATION:
+            return {...state, deleteConfirmation: true};
+
+        case CLOSE_DELETE_CONFIRMATION:
+            return {...state, deleteConfirmation: false};
+
+            
 
         default:
             return state;

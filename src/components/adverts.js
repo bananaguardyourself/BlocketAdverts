@@ -9,7 +9,7 @@ import Advert from './advert'
 export default class Adverts extends Component {
 
     render() {
-        const {adverts, fetching, error, advertActions, sorting, sortingActions, deleteConfirmation, filteringActions, filtering} = this.props;
+        const {adverts, fetching, error, advertActions, sorting, sortingActions, deleteConfirmation, selectedId, filteringActions, filtering} = this.props;
 
         let newsTemplate;
 
@@ -17,7 +17,7 @@ export default class Adverts extends Component {
             newsTemplate = adverts.map(function (item) {
                 return (
                     <div key={item.id}>
-                        <Advert advert={item} deleteConfirmation={deleteConfirmation} advertActions={advertActions}/>
+                        <Advert advert={item} deleteConfirmation={deleteConfirmation} selectedId={selectedId} advertActions={advertActions}/>
                     </div>
                 )
             })
@@ -53,5 +53,6 @@ Adverts.propTypes = {
     advertActions: PropTypes.object,
     sorting: PropTypes.object,
     sortingActions: PropTypes.object,
-    deleteConfirmation: PropTypes.bool.isRequired
+    deleteConfirmation: PropTypes.bool.isRequired,
+    selectedId: PropTypes.number.isRequired
 };

@@ -24,7 +24,8 @@ const initialState = {
     fetching: false,
     error: '',
     deleteError: false,
-    deleteConfirmation: false
+    deleteConfirmation: false,
+    selectedId: 0
 };
 
 export default function adverts(state = initialState, action) {
@@ -87,11 +88,10 @@ export default function adverts(state = initialState, action) {
                     } : advert)
             };
         case SHOW_DELETE_CONFIRMATION:
-            return {...state, deleteConfirmation: true};
+            return {...state, deleteConfirmation: true, selectedId: action.payload};
 
         case CLOSE_DELETE_CONFIRMATION:
             return {...state, deleteConfirmation: false};
-
 
         default:
             return state;

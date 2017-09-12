@@ -25,6 +25,7 @@ class App extends Component {
                 <Adverts adverts={adverts.adverts} fetching={adverts.fetching}
                          error={adverts.error} advertActions={advertsActions}
                          deleteConfirmation={adverts.deleteConfirmation}
+                         selectedId={adverts.selectedId}
                          sortingActions={sortingActions} sorting={sorting} filteringActions={filteringActions}
                          filtering={filtering}/>
             </div>
