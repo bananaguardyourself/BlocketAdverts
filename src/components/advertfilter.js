@@ -17,7 +17,8 @@ import {
     FILTERING_DATE_MONTH,
     FILTERING_DATE_YEAR
 } from '../constants/filtering'
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 
 export default class AdvertFilter extends Component {
 

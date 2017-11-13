@@ -1,10 +1,12 @@
 /**
  * Created by Ilya on 05.01.2017.
  */
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import {Link} from 'react-router'
 
-var HeadBanner = React.createClass({
+var HeadBanner = createReactClass({
     render: function () {
         return (
             <div>

@@ -1,7 +1,8 @@
 /**
  * Created by Ilya on 15.01.2017.
  */
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import {Link} from 'react-router'
 
 export default class Signin extends Component {

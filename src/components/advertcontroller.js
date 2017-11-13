@@ -1,7 +1,8 @@
 /**
  * Created by Ilya on 05.02.2017.
  */
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 
 export default class AdvertController extends Component {
     onAddBtnClick() {

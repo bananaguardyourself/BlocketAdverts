@@ -4,6 +4,7 @@
 import React, {Component} from 'react'
 import Modal from 'react-modal'
 import {Link} from 'react-router'
+import PropTypes from 'prop-types';
 
 const customStyles = {
     content: {
@@ -188,23 +189,23 @@ export default class Advert extends Component {
 }
 
 Advert.propTypes = {
-    advert: React.PropTypes.shape({
-        id: React.PropTypes.number.isRequired,
-        link: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired,
-        dateOpen: React.PropTypes.string.isRequired,
-        currentPrice: React.PropTypes.number.isRequired,
-        length: React.PropTypes.number.isRequired,
-        lastUpdate: React.PropTypes.string.isRequired,
-        picture: React.PropTypes.string.isRequired,
-        dateClosed: React.PropTypes.string
+    advert: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        link: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        dateOpen: PropTypes.string.isRequired,
+        currentPrice: PropTypes.number.isRequired,
+        length: PropTypes.number.isRequired,
+        lastUpdate: PropTypes.string.isRequired,
+        picture: PropTypes.string.isRequired,
+        dateClosed: PropTypes.string
     }),
-    deleteConfirmation: React.PropTypes.bool.isRequired,
-    selectedId: React.PropTypes.number.isRequired,
-    advertActions: React.PropTypes.shape({
-        deleteAdvert: React.PropTypes.func.isRequired,
-        updateAdvert: React.PropTypes.func.isRequired,
-        showDeleteConfirmation: React.PropTypes.func.isRequired,
-        closeDeleteConfirmation: React.PropTypes.func.isRequired
+    deleteConfirmation: PropTypes.bool.isRequired,
+    selectedId: PropTypes.number.isRequired,
+    advertActions: PropTypes.shape({
+        deleteAdvert: PropTypes.func.isRequired,
+        updateAdvert: PropTypes.func.isRequired,
+        showDeleteConfirmation: PropTypes.func.isRequired,
+        closeDeleteConfirmation: PropTypes.func.isRequired
     })
 };

@@ -1,7 +1,8 @@
 /**
  * Created by Ilya on 08.01.2017.
  */
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import AdvertController from './advertcontroller'
 import AdvertFilter from './advertfilter'
 import Advert from './advert'
