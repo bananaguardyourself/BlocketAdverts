@@ -76,14 +76,13 @@ export default function adverts(state = initialState, action) {
                 ...state,
                 adverts: state.adverts.map(advert => advert.id === action.id ? {
                         ...advert,
-                        advertName: action.payload.advertName,
-                        advertPicture: action.payload.advertPicture,
-                        advertLength: action.payload.advertLength,
-                        advertPrice: action.payload.advertPrice,
-                        advertOpen: action.payload.advertOpen,
-                        advertClosed: action.payload.advertClosed,
-                        advertUpdated: action.payload.advertUpdated,
-                        advertOldPrices: action.payload.advertOldPrices,
+                        name: action.payload.name,
+                        picture: action.payload.picture,
+                        length: action.payload.length,
+                        currentPrice: action.payload.currentPrice,
+                        dateOpen: action.payload.dateOpen,
+                        dateClosed: action.payload.dateClosed,
+                        oldPrices: action.payload.oldPrices,
                         lastUpdate: action.payload.lastUpdate
                     } : advert)
             };
