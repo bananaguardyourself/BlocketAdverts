@@ -82,6 +82,7 @@ export default function adverts(state = initialState, action) {
                         currentPrice: action.payload.currentPrice,
                         dateOpen: action.payload.dateOpen,
                         dateClosed: action.payload.dateClosed,
+                        description: action.payload.description,
                         oldPrices: action.payload.oldPrices,
                         lastUpdate: action.payload.lastUpdate
                     } : advert)

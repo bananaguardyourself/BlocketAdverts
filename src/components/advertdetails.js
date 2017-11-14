@@ -1,7 +1,7 @@
 /**
  * Created by Ilya on 21.08.2017.
  */
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-modal'
 import Photos from './photos'
 import PropTypes from 'prop-types';
@@ -22,7 +22,7 @@ export default class AdvertDetails extends Component {
 
     componentWillMount() {
         let advertId = this.props.params.id;
-        const {getAdvert} = this.props.advertdetailsactions;
+        const { getAdvert } = this.props.advertdetailsactions;
         getAdvert(advertId);
     }
 
@@ -134,6 +134,7 @@ export default class AdvertDetails extends Component {
         let advertPictures = this.props.advert.pictures;
         let advertLength = this.props.advert.length;
         let advertPrice = this.props.advert.currentPrice;
+        let advertDescription = this.props.advert.description;
         let deleteConfirmation = this.props.advert.deleteConfirmation;
         let deleted = this.props.advert.deleted;
 
@@ -159,43 +160,48 @@ export default class AdvertDetails extends Component {
                             <div className='detailsLength'>{advertLength} ft</div>
                             <div className='detailsLength'>{advertPrice} :-</div>
                             <div className='detailsDateValues'>
-                                <div>Added: {advertOpen} Checked: {advertUpdated} {advertClosed ?
-                                    <span> Closed: {advertClosed} </span> : null}</div>
+                                <div>Added: {advertOpen} </div>
+                                <div>Checked: {advertUpdated} </div>
+                                {advertClosed ?
+                                    <div> Closed: {advertClosed} </div> : null}
                             </div>
                         </div>
-                        <Photos pictures={advertPictures}/>
+                        <Photos pictures={advertPictures} />
+                        <div>
+                            {advertDescription}
+                        </div>
                         <div className='detailsButtons'>
                             <button className='button-link' onClick={::this.onLinkClick}><span>To Blocket</span>
                             </button>
-                            <button className='button-link' ref={button => this.updateButton = button}
-                                    onClick={::this.onUpdateClick}><span
-                                ref={span => this.updateSpan = span }>Update</span>
+                        <button className='button-link' ref={button => this.updateButton = button}
+                            onClick={::this.onUpdateClick}><span
+                                ref={span => this.updateSpan = span}>Update</span>
                             </button>
-                            <button className='button-link' ref={button => this.deleteButton = button}
-                                    onClick={::this.onDeleteClick}><span
-                                ref={span => this.deleteSpan = span}>Delete</span>
+                    <button className='button-link' ref={button => this.deleteButton = button}
+                        onClick={::this.onDeleteClick}><span
+                            ref={span => this.deleteSpan = span}>Delete</span>
                             </button>
-                        </div>
-                    </div>
+                        </div >
+                    </div >
                 }
                 <Modal
-                    isOpen={deleteConfirmation}
-                    style={customStyles}
-                    contentLabel='deleteConfirmationModal'
-                >
-                    <div className='confirmdelete'>
-                        <h2 className='confirmHeader'>Are you sure you want <br/> do delete this advert?</h2>
-                        <button className='button-link'
-                                onClick={::this.onCancelDeleteClick}><span
-                            ref={span => this.updateSpan = span }>Cancel</span>
+    isOpen={deleteConfirmation}
+    style={customStyles}
+    contentLabel='deleteConfirmationModal'
+>
+    <div className='confirmdelete'>
+        <h2 className='confirmHeader'>Are you sure you want <br /> do delete this advert?</h2>
+        <button className='button-link'
+            onClick={::this.onCancelDeleteClick}><span
+                ref={span => this.updateSpan = span}>Cancel</span>
                         </button>
-                        <button className='button-link'
-                                onClick={::this.onConfirmDeleteClick}><span
-                            ref={span => this.deleteSpan = span}>Delete</span>
+    <button className='button-link'
+        onClick={::this.onConfirmDeleteClick}><span
+            ref={span => this.deleteSpan = span}>Delete</span>
                         </button>
-                    </div>
-                </Modal>
-            </div>
+                    </div >
+                </Modal >
+            </div >
         )
     }
 }
@@ -210,6 +216,7 @@ AdvertDetails.propTypes = {
         length: PropTypes.number.isRequired,
         lastUpdate: PropTypes.string.isRequired,
         picture: PropTypes.string.isRequired,
+        description: PropTypes.string,
         dateClosed: PropTypes.string,
         pictures: PropTypes.array,
         deleteConfirmation: PropTypes.bool.isRequired

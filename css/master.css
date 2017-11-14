@@ -217,7 +217,7 @@ a img {
 }
 
 .detailsMain{
-    display: flex;
+    display: block;
 }
 
 .detailsLength {
