@@ -4,6 +4,7 @@
     border: 1px solid #001AAA;
     color: #001AAA;
     width: 330px;
+    font-size: 22px;
 }
 
 .signinFieldsetError
@@ -11,12 +12,13 @@
     padding-top: 10px;
     border: 1px solid Red;
     color: #001AAA;
-    width: 330px;
+    width: 330px; 
+    font-size: 22px;
 }
 
 .signinFieldset_paragraph
 {
-    margin: 2px 12px 10px 10px;
+    margin: 2px 12px 10px 10px;    
 }
 
 .textEntry
@@ -24,7 +26,8 @@
     display:block;
     width: 320px;
     border: 1px solid #001AAA;
-    color: #001AAA;
+    color: #001AAA;    
+    font-size: 22px;
 }
 
 .submitButtonPanel

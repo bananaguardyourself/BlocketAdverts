@@ -70,7 +70,7 @@ export function verifiedSet(verified) {
     }
 }
 
-export function handleSignin(email, password) {
+export function handleSignin(email, password, errorCallback) {
 
     return function (dispatch) {
 
@@ -115,12 +115,14 @@ export function handleSignin(email, password) {
                     type: SIGNIN_FAIL,
                     payload: result.responseJSON.message
                 })
+
+                errorCallback();
             }
         });
     }
 }
 
-export function handleSignup(email, password, passwordrepeat) {
+export function handleSignup(email, password, passwordrepeat, errorCallback) {
 
     return function (dispatch) {
 
@@ -170,6 +172,8 @@ export function handleSignup(email, password, passwordrepeat) {
                         type: SIGNUP_FAIL,
                         payload: result.responseJSON.message
                     })
+
+                    errorCallback();
                 }
             });
         }

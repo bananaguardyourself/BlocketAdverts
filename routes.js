@@ -18,6 +18,7 @@ export const routes = (
             <Route path='/adverts/:id' component={requireAuthentication(AdvertDetails)}/>
             <Route path='/signin' component={requireAnonymity(UserSignin)}/>
             <Route path='/signup' component={requireAnonymity(UserSignup)}/>
+            <Route path='/restore' component={requireAnonymity(UserSignup)}/>
         </Route>
     </div>
 );
