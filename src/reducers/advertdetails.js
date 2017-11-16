@@ -10,7 +10,10 @@ import {
     DELETE_ADVERT_FAIL,
     DELETE_ADVERT_RESET,
     SHOW_DELETE_CONFIRMATION,
-    CLOSE_DELETE_CONFIRMATION
+    CLOSE_DELETE_CONFIRMATION,
+    UPDATE_ADVERT_REQUEST,
+    UPDATE_ADVERT_FAIL,
+    UPDATE_ADVERT_SUCCESS
 } from '../constants/adverts'
 
 const initialState = {
@@ -78,7 +81,30 @@ export default function advertdetails(state = initialState, action) {
         case CLOSE_DELETE_CONFIRMATION:
             return {...state, deleteConfirmation: false};
 
-            
+        case UPDATE_ADVERT_REQUEST:
+            return {...state};
+
+        case UPDATE_ADVERT_FAIL:
+            return {...state};
+
+        case UPDATE_ADVERT_SUCCESS:
+            return {
+                ...state,
+                id: action.payload.id,
+                link: action.payload.link,
+                name: action.payload.name,
+                dateOpen: action.payload.dateOpen,
+                dateClosed: action.payload.dateClosed,
+                currentPrice: action.payload.currentPrice,
+                length: action.payload.length,
+                lastUpdate: action.payload.lastUpdate,
+                picture: action.payload.picture,
+                pictures: action.payload.pictures,
+                oldPrices: action.payload.oldPrices,
+                description: action.payload.description,
+                error: '',
+                deleted: false
+            };
 
         default:
             return state;

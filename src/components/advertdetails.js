@@ -41,27 +41,27 @@ export default class AdvertDetails extends Component {
 
     onConfirmDeleteClick() {
         this.props.advertactions.closeDeleteConfirmation();
-        this.props.advertactions.deleteAdvert(this.props.advert.id, this.loaderDelete);
+        this.props.advertactions.deleteAdvert(this.props.advert.id, this.loaderDelete.bind(this));
         this.deleteButton.setAttribute('disabled', 'disabled');
     }
 
-    static loaderDelete() {
+    loaderDelete() {
         setTimeout(function () {
             if (this.deleteSpan !== null) {
                 this.deleteSpan.textContent = '';
                 this.deleteButton.className = 'button-link link-onclick';
-                this.setErrorDelete(this.callbackDelete)
+                this.setErrorDelete(this.callbackDelete.bind(this))
             }
-        }, 500);
+        }.bind(this), 500);
     }
 
     setErrorDelete(callbackFunction) {
         setTimeout(function () {
             if (this.deleteButton !== null) {
                 this.deleteButton.className = 'button-link deleteError';
-                callbackFunction(this.finishedDelete);
+                callbackFunction(this.finishedDelete.bind(this));
             }
-        }, 1000);
+        }.bind(this), 1000);
     }
 
     callbackDelete(finishedFunction) {
@@ -71,42 +71,42 @@ export default class AdvertDetails extends Component {
                 this.deleteButton.removeAttribute('disabled');
                 finishedFunction();
             }
-        }, 1700);
+        }.bind(this), 1700);
     }
 
-    static finishedDelete() {
+    finishedDelete() {
         setTimeout(function () {
             if (this.deleteButton !== null) {
                 this.deleteButton.className = 'button-link';
                 this.deleteSpan.textContent = 'Delete';
             }
-        }, 400);
+        }.bind(this), 400);
     }
 
     onUpdateClick() {
         this.updateSpan.textContent = '';
         this.updateButton.className = 'button-link link-onclick';
         this.updateButton.setAttribute('disabled', 'disabled');
-        ::this.loaderUpdate();
+        this.loaderUpdate();
     }
 
     loaderUpdate() {
         setTimeout(function () {
-            this.props.advertactions.updateAdvert(this.props.advert.id, ::this.setOkUpdate, ::this.setErrorUpdate);
+            this.props.advertactions.updateAdvert(this.props.advert.id, this.setOkUpdate.bind(this), this.setErrorUpdate.bind(this));
         }.bind(this), 700);
     }
 
     setOkUpdate() {
         setTimeout(function () {
             this.updateButton.className = 'button-link updateOk';
-            this.callbackUpdate(::this.finishedUpdate);
+            this.callbackUpdate(this.finishedUpdate.bind(this));
         }.bind(this), 1000);
     }
 
     setErrorUpdate() {
         setTimeout(function () {
             this.updateButton.className = 'button-link deleteError';
-            this.callbackUpdate(::this.finishedUpdate);
+            this.callbackUpdate(this.finishedUpdate.bind(this));
         }.bind(this), 1000);
     }
 
@@ -135,6 +135,7 @@ export default class AdvertDetails extends Component {
         let advertLength = this.props.advert.length;
         let advertPrice = this.props.advert.currentPrice;
         let advertDescription = this.props.advert.description;
+        let advertOldPrices = this.props.advert.oldPrices;
         let deleteConfirmation = this.props.advert.deleteConfirmation;
         let deleted = this.props.advert.deleted;
 
@@ -142,62 +143,61 @@ export default class AdvertDetails extends Component {
             <div className='bodyPane'>
                 {deleted ?
                     <div className='advert'>
-                        <div className='advertName'>{advertName}</div>
-                        <div className='detailsMain'>
-                            <div className='detailsLength'>{advertLength} ft</div>
-                            <div className='detailsLength'>{advertPrice} :-</div>
-                            <div className='detailsDateValues'>
-                                <div>Added: {advertOpen} Checked: {advertUpdated} {advertClosed ?
-                                    <span> Closed: {advertClosed} </span> : null}</div>
-                            </div>
-                        </div>
                         <h1>DELETED</h1>
                     </div>
                     :
                     <div className='advert'>
                         <div className='advertName'>{advertName}</div>
                         <div className='detailsMain'>
-                            <div className='detailsLength'>{advertLength} ft</div>
-                            <div className='detailsLength'>{advertPrice} :-</div>
+                            <div className='detailsLength'>
+                                <span className='detailsText'> {advertLength} ft </span>
+                                <span className='detailsText'> {advertPrice} :- </span>
+                            </div>
                             <div className='detailsDateValues'>
-                                <div>Added: {advertOpen} </div>
-                                <div>Checked: {advertUpdated} </div>
+                                <span className='detailsText'>Added: {advertOpen} </span>
+                                <span className='detailsText'>Checked: {advertUpdated} </span>
+                            </div>
+                            <div className='detailsDateValues'>
                                 {advertClosed ?
-                                    <div> Closed: {advertClosed} </div> : null}
+                                    <span className='detailsText'> Closed: {advertClosed} </span> : null}
+                                <div>
+                                    Old prices:
+                                    {advertOldPrices ? advertOldPrices.map((price, i) => (
+                                        <div key={i}>
+                                            {price.priceDate} - {price.priceValue} :-
+                                        </div>
+                                    )) : null}
+                                </div>
                             </div>
                         </div>
                         <Photos pictures={advertPictures} />
-                        <div>
-                            {advertDescription}
-                        </div>
+                        <div dangerouslySetInnerHTML={{ __html: advertDescription }} />
                         <div className='detailsButtons'>
-                            <button className='button-link' onClick={::this.onLinkClick}><span>To Blocket</span>
+                            <button className='button-link' onClick={this.onLinkClick.bind(this)}><span>To Blocket</span>
                             </button>
-                        <button className='button-link' ref={button => this.updateButton = button}
-                            onClick={::this.onUpdateClick}><span
-                                ref={span => this.updateSpan = span}>Update</span>
+                            <button className='button-link' ref={button => this.updateButton = button}
+                                onClick={this.onUpdateClick.bind(this)}><span
+                                    ref={span => this.updateSpan = span}>Update</span>
                             </button>
-                    <button className='button-link' ref={button => this.deleteButton = button}
-                        onClick={::this.onDeleteClick}><span
-                            ref={span => this.deleteSpan = span}>Delete</span>
+                            <button className='button-link' ref={button => this.deleteButton = button}
+                                onClick={this.onDeleteClick.bind(this)}><span
+                                    ref={span => this.deleteSpan = span}>Delete</span>
                             </button>
                         </div >
                     </div >
                 }
                 <Modal
-    isOpen={deleteConfirmation}
-    style={customStyles}
-    contentLabel='deleteConfirmationModal'
->
-    <div className='confirmdelete'>
-        <h2 className='confirmHeader'>Are you sure you want <br /> do delete this advert?</h2>
-        <button className='button-link'
-            onClick={::this.onCancelDeleteClick}><span
-                ref={span => this.updateSpan = span}>Cancel</span>
+                    isOpen={deleteConfirmation}
+                    style={customStyles}
+                    contentLabel='deleteConfirmationModal'
+                >
+                    <div className='confirmdelete'>
+                        <h2 className='confirmHeader'>Are you sure you want <br /> do delete this advert?</h2>
+                        <button className='button-link'
+                            onClick={this.onCancelDeleteClick.bind(this)}><span>Cancel</span>
                         </button>
-    <button className='button-link'
-        onClick={::this.onConfirmDeleteClick}><span
-            ref={span => this.deleteSpan = span}>Delete</span>
+                        <button className='button-link'
+                            onClick={this.onConfirmDeleteClick.bind(this)}><span>Delete</span>
                         </button>
                     </div >
                 </Modal >

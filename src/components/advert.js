@@ -1,9 +1,9 @@
 /**
  * Created by Ilya on 09.08.2017.
  */
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-modal'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 import PropTypes from 'prop-types';
 
 const customStyles = {
@@ -35,7 +35,7 @@ export default class Advert extends Component {
 
     onConfirmDeleteClick() {
         this.props.advertActions.closeDeleteConfirmation();
-        this.props.advertActions.deleteAdvert(this.props.advert.id, this.loaderDelete);
+        this.props.advertActions.deleteAdvert(this.props.advert.id, this.loaderDelete.bind(this));
         this.deleteButton.setAttribute('disabled', 'disabled');
     }
 
@@ -44,18 +44,18 @@ export default class Advert extends Component {
             if (this.deleteSpan !== null) {
                 this.deleteSpan.textContent = '';
                 this.deleteButton.className = 'button-link link-onclick';
-                this.setErrorDelete(this.callbackDelete)
+                this.setErrorDelete(this.callbackDelete.bind(this))
             }
-        }, 500);
+        }.bind(this), 500);
     }
 
     setErrorDelete(callbackFunction) {
         setTimeout(function () {
             if (this.deleteButton !== null) {
                 this.deleteButton.className = 'button-link deleteError';
-                callbackFunction(this.finishedDelete);
+                callbackFunction(this.finishedDelete.bind(this));
             }
-        }, 1000);
+        }.bind(this), 1000);
     }
 
     callbackDelete(finishedFunction) {
@@ -65,29 +65,29 @@ export default class Advert extends Component {
                 this.deleteButton.removeAttribute('disabled');
                 finishedFunction();
             }
-        }, 1700);
+        }.bind(this), 1700);
     }
 
-    static finishedDelete() {
+    finishedDelete() {
         setTimeout(function () {
             if (this.deleteButton !== null) {
                 this.deleteButton.className = 'button-link';
                 this.deleteSpan.textContent = 'Delete';
             }
-        }, 400);
+        }.bind(this), 400);
     }
 
     onUpdateClick() {
         this.updateSpan.textContent = '';
         this.updateButton.className = 'button-link link-onclick';
         this.updateButton.setAttribute('disabled', 'disabled');
-        ::this.loaderUpdate();
+        this.loaderUpdate();
     }
 
 
     loaderUpdate() {
         setTimeout(function () {
-            this.props.advertActions.updateAdvert(this.props.advert.id, ::this.setOkUpdate, ::this.setErrorUpdate);
+            this.props.advertActions.updateAdvert(this.props.advert.id, this.setOkUpdate.bind(this), this.setErrorUpdate.bind(this));
         }.bind(this), 700);
     }
 
@@ -95,7 +95,7 @@ export default class Advert extends Component {
     setOkUpdate() {
         setTimeout(function () {
             this.updateButton.className = 'button-link updateOk';
-            this.callbackUpdate(::this.finishedUpdate);
+            this.callbackUpdate(this.finishedUpdate.bind(this));
         }.bind(this), 1000);
     }
 
@@ -103,7 +103,7 @@ export default class Advert extends Component {
     setErrorUpdate() {
         setTimeout(function () {
             this.updateButton.className = 'button-link deleteError';
-            this.callbackUpdate(::this.finishedUpdate);
+            this.callbackUpdate(this.finishedUpdate.bind(this));
         }.bind(this), 1000);
     }
 
@@ -145,24 +145,24 @@ export default class Advert extends Component {
                     {advertClosed ? <div> Closed: {advertClosed} </div> : null}
                 </div>
                 <div className='advertLinks'>
-                    <button className='button-link' onClick={::this.onLinkClick}><span>To Blocket</span></button>
+                    <button className='button-link' onClick={this.onLinkClick.bind(this)}><span>To Blocket</span></button>
                     <button className='button-link' ref={button => this.updateButton = button}
-                            onClick={::this.onUpdateClick}><span ref={span => this.updateSpan = span }>Update</span>
+                        onClick={this.onUpdateClick.bind(this)}><span ref={span => this.updateSpan = span}>Update</span>
                     </button>
                     <button className='button-link' ref={button => this.deleteButton = button}
-                            onClick={::this.onDeleteClick}><span ref={span => this.deleteSpan = span}>Delete</span>
+                        onClick={this.onDeleteClick.bind(this)}><span ref={span => this.deleteSpan = span}>Delete</span>
                     </button>
                 </div>
                 <div className='advertData'>
                     <div className='advertTextData'>
                         <div className='advertLength'>{advertLength} ft</div>
                         {advertOldPrices.length > 0 ? <div className='advertLength'>{advertPrice} :-
-                                <br/> was {advertOldPrices[advertOldPrices.length - 1]} :-</div> :
-                            <div className='advertLength'>{advertPrice} :-</div> }
+                                <br /> was {advertOldPrices[advertOldPrices.length - 1].priceValue} :-</div> :
+                            <div className='advertLength'>{advertPrice} :-</div>}
                     </div>
                     <div className='advertPicture'>
                         <Link to={'/adverts/' + advertId}>
-                            <img src={advertPicture + '?' + Math.random()} width='100%' height='100%'/>
+                            <img src={advertPicture + '?' + Math.random()} width='100%' height='100%' />
                         </Link>
                     </div>
                 </div>
@@ -172,14 +172,12 @@ export default class Advert extends Component {
                     contentLabel='deleteConfirmationModal'
                 >
                     <div className='confirmdelete'>
-                        <h2 className='confirmHeader'>Are you sure you want <br/> do delete this advert?</h2>
+                        <h2 className='confirmHeader'>Are you sure you want <br /> do delete this advert?</h2>
                         <button className='button-link'
-                                onClick={::this.onCancelDeleteClick}><span
-                            ref={span => this.updateSpan = span }>Cancel</span>
+                            onClick={this.onCancelDeleteClick.bind(this)}><span>Cancel</span>
                         </button>
                         <button className='button-link'
-                                onClick={::this.onConfirmDeleteClick}><span
-                            ref={span => this.deleteSpan = span}>Delete</span>
+                            onClick={this.onConfirmDeleteClick.bind(this)}><span>Delete</span>
                         </button>
                     </div>
                 </Modal>
