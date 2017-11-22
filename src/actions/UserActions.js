@@ -14,7 +14,12 @@ import {
     SIGNOUT_SUCCES,
     GET_USER_INFO_REQUEST,
     GET_USER_INFO_SUCCES,
-    GET_USER_INFO_FAIL
+    GET_USER_INFO_FAIL,
+    RESTORE_REQUEST,
+    RESTORE_SUCCES,
+    RESTORE_FAIL,
+    SHOW_MODAL,
+    CLOSE_MODAL
 } from '../constants/User'
 
 import {
@@ -83,13 +88,13 @@ export function handleSignin(email, password, errorCallback) {
             url: 'http://35.156.176.72/users/signin',
             contentType: 'application/x-www-form-urlencoded',
             dataType: 'json',
-            data: {Email: email, Password: password},
+            data: { Email: email, Password: password },
             success: function (result) {
 
                 var exp = new Date();
                 exp.setDate(exp.getDate() + 14);
 
-                cookie.save('tk', result.token, {path: '/', expires: exp});
+                cookie.save('tk', result.token, { path: '/', expires: exp });
 
                 dispatch({
                     type: SIGNIN_SUCCES,
@@ -109,7 +114,7 @@ export function handleSignin(email, password, errorCallback) {
             },
             error: function (result) {
 
-                cookie.remove('tk', {path: '/'});
+                cookie.remove('tk', { path: '/' });
 
                 dispatch({
                     type: SIGNIN_FAIL,
@@ -142,13 +147,13 @@ export function handleSignup(email, password, passwordrepeat, errorCallback) {
                 url: 'http://35.156.176.72/users/signup',
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
-                data: {Email: email, Password: password},
+                data: { Email: email, Password: password },
                 success: function (result) {
 
                     var exp = new Date();
                     exp.setDate(exp.getDate() + 14);
 
-                    cookie.save('tk', result.token, {path: '/', expires: exp});
+                    cookie.save('tk', result.token, { path: '/', expires: exp });
 
                     dispatch({
                         type: SIGNUP_SUCCES,
@@ -190,7 +195,7 @@ export function handleSignOut() {
             type: SIGNOUT_REQUEST
         });
 
-        cookie.remove('tk', {path: '/'});
+        cookie.remove('tk', { path: '/' });
 
         dispatch({
             type: SIGNOUT_SUCCES
@@ -236,7 +241,7 @@ export function getUserInfo() {
                 type: 'GET',
                 url: 'http://35.156.176.72/users',
                 dataType: 'json',
-                headers: {'Authorization': tk},
+                headers: { 'Authorization': tk },
                 success: function (response) {
                     dispatch({
                         type: GET_USER_INFO_SUCCES,
@@ -281,13 +286,12 @@ export function verifyAnonimity() {
 
         var tk = cookie.load('tk');
 
-        if (tk)
-        {
+        if (tk) {
             $.ajax({
                 type: 'GET',
                 url: 'http://35.156.176.72/users',
                 dataType: 'json',
-                headers: {'Authorization': tk},
+                headers: { 'Authorization': tk },
                 success: function (response) {
                     dispatch({
                         type: GET_USER_INFO_SUCCES,
@@ -319,12 +323,61 @@ export function verifyAnonimity() {
                 }
             });
         }
-        else
-        {
+        else {
             dispatch({
                 type: GET_USER_INFO_FAIL,
                 payload: 'Unauthorized'
             })
         }
+    }
+}
+
+export function handleRestore(email) {
+
+    return function (dispatch) {
+
+        dispatch({
+            type: RESTORE_REQUEST
+        });
+
+        $.ajax({
+            type: 'PUT',
+            url: 'http://35.156.176.72/users/email?=' + email,
+            dataType: 'json',
+            success: function () {
+
+                dispatch({
+                    type: RESTORE_SUCCES,
+                    payload: 'To restore the password follow the instructions in the email.' 
+                });
+                
+            },
+            error: function (result) {
+
+                dispatch({
+                    type: RESTORE_FAIL,
+                    payload: result.responseJSON.message
+                })
+
+            }
+        });
+    }
+}
+
+export function showModal() {
+    return (dispatch) => {
+
+        dispatch({
+            type: SHOW_MODAL
+        });
+    }
+}
+
+export function closeModal() {
+    return (dispatch) => {
+
+        dispatch({
+            type: CLOSE_MODAL
+        });
     }
 }

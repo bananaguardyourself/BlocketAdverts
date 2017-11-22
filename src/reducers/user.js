@@ -14,7 +14,12 @@ import {
     SIGNOUT_SUCCES,
     GET_USER_INFO_REQUEST,
     GET_USER_INFO_SUCCES,
-    GET_USER_INFO_FAIL
+    GET_USER_INFO_FAIL,
+    RESTORE_REQUEST,
+    RESTORE_SUCCES,
+    RESTORE_FAIL,
+    SHOW_MODAL,
+    CLOSE_MODAL
 } from '../constants/User'
 
 const initialState = {
@@ -22,14 +27,15 @@ const initialState = {
     id: 0,
     error: '',
     verified: false,
-    isAuthenticated: false
+    isAuthenticated: false,
+    modalShow: false
 };
 
 export default function user(state = initialState, action) {
 
     switch (action.type) {
         case SIGNIN_REQUEST:
-            return {...state};
+            return { ...state };
 
         case SIGNIN_SUCCES:
             return {
@@ -41,10 +47,10 @@ export default function user(state = initialState, action) {
             };
 
         case SIGNIN_FAIL:
-            return {...state, error: action.payload, isAuthenticated: false};
+            return { ...state, error: action.payload, isAuthenticated: false };
 
         case SIGNUP_REQUEST:
-            return {...state};
+            return { ...state };
 
         case SIGNUP_SUCCES:
             return {
@@ -56,16 +62,16 @@ export default function user(state = initialState, action) {
             };
 
         case SIGNUP_FAIL:
-            return {...state, error: action.payload, isAuthenticated: false};
+            return { ...state, error: action.payload, isAuthenticated: false };
 
         case ERROR_SET:
-            return {...state, error: action.payload};
+            return { ...state, error: action.payload };
 
         case VERIFIED_SET:
-            return {...state, verified: action.payload};
+            return { ...state, verified: action.payload };
 
         case SIGNOUT_REQUEST:
-            return {...state};
+            return { ...state };
 
         case SIGNOUT_SUCCES:
             return {
@@ -77,7 +83,7 @@ export default function user(state = initialState, action) {
             };
 
         case GET_USER_INFO_REQUEST:
-            return {...state};
+            return { ...state };
 
         case GET_USER_INFO_SUCCES:
             return {
@@ -89,7 +95,22 @@ export default function user(state = initialState, action) {
             };
 
         case GET_USER_INFO_FAIL:
-            return {...state, error: action.payload, isAuthenticated: false};
+            return { ...state, error: action.payload, isAuthenticated: false };
+
+        case RESTORE_REQUEST:
+            return { ...state };
+
+        case RESTORE_SUCCES:
+            return { ...state, error: action.payload, modalShow: true };
+
+        case RESTORE_FAIL:
+            return { ...state, error: action.payload, modalShow: true };
+
+        case SHOW_MODAL:
+            return { ...state, modalShow: true };
+
+        case CLOSE_MODAL:
+            return { ...state, modalShow: false };
 
         default:
             return state;
