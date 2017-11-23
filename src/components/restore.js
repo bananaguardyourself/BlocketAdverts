@@ -106,10 +106,10 @@ export default class Restore extends Component {
                 <Modal
                     isOpen={modalShow}
                     style={customStyles}
-                    contentLabel='deleteConfirmationModal'
+                    contentLabel='restoreModal'
                 >
-                    <div className='confirmdelete'>
-                        <h2 className='confirmHeader'>{error}</h2>
+                    <div className='restoreModal'>
+                        <h3 className='restoreHeader'>{error}</h3>
                         <button className='button-link'
                             onClick={this.onModalOkClick.bind(this)}><span>OK</span>
                         </button>

@@ -18,3 +18,11 @@
 .confirmHeader{
     text-align: center;
 }
+
+.restoreModal {
+    color: #001AAA;
+}
+
+.restoreHeader{
+    text-align: center;
+}

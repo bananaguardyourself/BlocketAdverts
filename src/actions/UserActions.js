@@ -341,8 +341,9 @@ export function handleRestore(email) {
         });
 
         $.ajax({
-            type: 'PUT',
-            url: 'http://35.156.176.72/users/email?=' + email,
+            method: 'PUT',
+            url: 'http://35.156.176.72/users/restore?email=' + email,
+            contentType: 'application/x-www-form-urlencoded',
             dataType: 'json',
             success: function () {
 
