@@ -18,6 +18,9 @@ import {
     RESTORE_REQUEST,
     RESTORE_SUCCES,
     RESTORE_FAIL,
+    CANCEL_RESTORE_REQUEST,
+    CANCEL_RESTORE_SUCCES,
+    CANCEL_RESTORE_FAIL,
     SHOW_MODAL,
     CLOSE_MODAL
 } from '../constants/User'
@@ -106,6 +109,14 @@ export default function user(state = initialState, action) {
         case RESTORE_FAIL:
             return { ...state, error: action.payload, modalShow: true };
 
+        case CANCEL_RESTORE_REQUEST:
+            return { ...state }
+
+        case CANCEL_RESTORE_SUCCES:
+            return { ...state, error: '' };
+
+        case CANCEL_RESTORE_FAIL:
+            return { ...state, error: action.payload };
         case SHOW_MODAL:
             return { ...state, modalShow: true };
 

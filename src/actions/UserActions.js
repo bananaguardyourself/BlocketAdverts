@@ -18,6 +18,9 @@ import {
     RESTORE_REQUEST,
     RESTORE_SUCCES,
     RESTORE_FAIL,
+    CANCEL_RESTORE_REQUEST,
+    CANCEL_RESTORE_SUCCES,
+    CANCEL_RESTORE_FAIL,
     SHOW_MODAL,
     CLOSE_MODAL
 } from '../constants/User'
@@ -364,6 +367,38 @@ export function handleRestore(email) {
         });
     }
 }
+
+export function cancelRestore(code) {
+    
+        return function (dispatch) {
+    
+            dispatch({
+                type: CANCEL_RESTORE_REQUEST
+            });
+    
+            $.ajax({
+                method: 'PUT',
+                url: 'http://35.156.176.72/users/cancelrestore/' + code,
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                success: function () {
+    
+                    dispatch({
+                        type: CANCEL_RESTORE_SUCCES
+                    });
+                    
+                },
+                error: function (result) {
+    
+                    dispatch({
+                        type: CANCEL_RESTORE_FAIL,
+                        payload: result.responseJSON.message
+                    })
+    
+                }
+            });
+        }
+    }
 
 export function showModal() {
     return (dispatch) => {
