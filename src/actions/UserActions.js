@@ -21,6 +21,9 @@ import {
     CANCEL_RESTORE_REQUEST,
     CANCEL_RESTORE_SUCCES,
     CANCEL_RESTORE_FAIL,
+    PASSWORD_CHANGE_REQUEST,
+    PASSWORD_CHANGE_SUCCES,
+    PASSWORD_CHANGE_FAIL,
     SHOW_MODAL,
     CLOSE_MODAL
 } from '../constants/User'
@@ -344,7 +347,7 @@ export function handleRestore(email) {
         });
 
         $.ajax({
-            method: 'PUT',
+            method: 'POST',
             url: 'http://35.156.176.72/users/restore?email=' + email,
             contentType: 'application/x-www-form-urlencoded',
             dataType: 'json',
@@ -378,7 +381,7 @@ export function cancelRestore(code) {
     
             $.ajax({
                 method: 'PUT',
-                url: 'http://35.156.176.72/users/cancelrestore/' + code,
+                url: 'http://35.156.176.72/users/restore/' + code,
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 success: function () {
@@ -399,6 +402,39 @@ export function cancelRestore(code) {
             });
         }
     }
+
+export function handlePasswordChange(code, password) {
+        
+            return function (dispatch) {
+        
+                dispatch({
+                    type: PASSWORD_CHANGE_REQUEST
+                });
+        
+                $.ajax({
+                    method: 'PUT',
+                    url: 'http://35.156.176.72/users/passwordchange/' + code,
+                    data: { Password: password },
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: 'json',
+                    success: function () {
+        
+                        dispatch({
+                            type: PASSWORD_CHANGE_SUCCES
+                        });
+                        
+                    },
+                    error: function (result) {
+        
+                        dispatch({
+                            type: PASSWORD_CHANGE_FAIL,
+                            payload: result.responseJSON.message
+                        })
+        
+                    }
+                });
+            }
+        }
 
 export function showModal() {
     return (dispatch) => {

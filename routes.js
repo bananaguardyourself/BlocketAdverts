@@ -11,7 +11,8 @@ import requireAuthentication from './src/components/authenticatedcomponent'
 import requireAnonymity from './src/components/anonymitycomponent'
 import AdvertDetails from './src/containers/advertContainer'
 import RestoreContainer from './src/containers/restoreContainer'
-import CancelRestoreContainer from './src/containers/cancelRestoreContainer'
+import CancelRestoreContainer from './src/containers/cancelrestoreContainer'
+import PasswordContainer from './src/containers/passwordContainer'
 
 export const routes = (
     <div>
@@ -21,7 +22,8 @@ export const routes = (
             <Route path='/signin' component={requireAnonymity(UserSignin)}/>
             <Route path='/signup' component={requireAnonymity(UserSignup)}/>
             <Route path='/restore' component={requireAnonymity(RestoreContainer)}/>
-            <Route path='/cancelRestore/:code' component={requireAnonymity(CancelRestoreContainer)}/>
+            <Route path='/cancelrestore/:code' component={requireAnonymity(CancelRestoreContainer)}/>
+            <Route path='/password/:code' component={requireAnonymity(PasswordContainer)}/>
         </Route>
     </div>
 );

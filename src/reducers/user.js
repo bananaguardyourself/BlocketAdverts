@@ -21,6 +21,9 @@ import {
     CANCEL_RESTORE_REQUEST,
     CANCEL_RESTORE_SUCCES,
     CANCEL_RESTORE_FAIL,
+    PASSWORD_CHANGE_REQUEST,
+    PASSWORD_CHANGE_SUCCES,
+    PASSWORD_CHANGE_FAIL,
     SHOW_MODAL,
     CLOSE_MODAL
 } from '../constants/User'
@@ -117,6 +120,16 @@ export default function user(state = initialState, action) {
 
         case CANCEL_RESTORE_FAIL:
             return { ...state, error: action.payload };
+
+        case PASSWORD_CHANGE_REQUEST:
+            return { ...state }
+
+        case PASSWORD_CHANGE_SUCCES:
+            return { ...state, error: '' };
+
+        case PASSWORD_CHANGE_FAIL:
+            return { ...state, error: action.payload };
+
         case SHOW_MODAL:
             return { ...state, modalShow: true };
 
