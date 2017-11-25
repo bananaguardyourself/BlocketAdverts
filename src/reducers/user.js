@@ -15,6 +15,9 @@ import {
     GET_USER_INFO_REQUEST,
     GET_USER_INFO_SUCCES,
     GET_USER_INFO_FAIL,
+    GET_USER_RESTORE_REQUEST,
+    GET_USER_RESTORE_SUCCES,
+    GET_USER_RESTORE_FAIL,
     RESTORE_REQUEST,
     RESTORE_SUCCES,
     RESTORE_FAIL,
@@ -102,6 +105,19 @@ export default function user(state = initialState, action) {
 
         case GET_USER_INFO_FAIL:
             return { ...state, error: action.payload, isAuthenticated: false };
+
+        case GET_USER_RESTORE_REQUEST:
+            return { ...state };
+
+        case GET_USER_RESTORE_SUCCES:
+            return {
+                ...state,
+                id: action.payload.user.id,
+                error: ''
+            };
+
+        case GET_USER_RESTORE_FAIL:
+            return { ...state, error: action.payload };
 
         case RESTORE_REQUEST:
             return { ...state };

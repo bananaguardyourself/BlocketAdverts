@@ -15,6 +15,9 @@ import {
     GET_USER_INFO_REQUEST,
     GET_USER_INFO_SUCCES,
     GET_USER_INFO_FAIL,
+    GET_USER_RESTORE_REQUEST,
+    GET_USER_RESTORE_SUCCES,
+    GET_USER_RESTORE_FAIL,
     RESTORE_REQUEST,
     RESTORE_SUCCES,
     RESTORE_FAIL,
@@ -282,6 +285,36 @@ export function getUserInfo() {
     }
 }
 
+export function getUserRestoreInfo(restoreCode) {
+
+    return function (dispatch) {
+
+        dispatch({
+            type: GET_USER_RESTORE_REQUEST
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://35.156.176.72/users?code=' + restoreCode,
+            dataType: 'json',
+            success: function (response) {
+                dispatch({
+                    type: GET_USER_RESTORE_SUCCES,
+                    payload: response
+                })
+            },
+            error: function (result) {
+
+                dispatch({
+                    type: GET_USER_RESTORE_FAIL,
+                    payload: result.responseJSON.message
+                })
+
+            }
+        });
+    }
+}
+
 export function verifyAnonimity() {
 
     return function (dispatch) {
@@ -355,9 +388,17 @@ export function handleRestore(email) {
 
                 dispatch({
                     type: RESTORE_SUCCES,
-                    payload: 'To restore the password follow the instructions in the email.' 
+                    payload: 'To restore the password follow the instructions in the email.'
                 });
-                
+
+                dispatch({
+                    type: ROUTING,
+                    payload: {
+                        method: 'replace',
+                        nextUrl: '/signin'
+                    }
+                })
+
             },
             error: function (result) {
 
@@ -372,69 +413,85 @@ export function handleRestore(email) {
 }
 
 export function cancelRestore(code) {
-    
-        return function (dispatch) {
-    
+
+    return function (dispatch) {
+
+        dispatch({
+            type: CANCEL_RESTORE_REQUEST
+        });
+
+        $.ajax({
+            method: 'PUT',
+            url: 'http://35.156.176.72/users/restore/' + code,
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            success: function () {
+
+                dispatch({
+                    type: CANCEL_RESTORE_SUCCES
+                });
+
+            },
+            error: function (result) {
+
+                dispatch({
+                    type: CANCEL_RESTORE_FAIL,
+                    payload: result.responseJSON.message
+                })
+
+            }
+        });
+    }
+}
+
+export function handlePasswordChange(code, password, passwordrepeat) {
+
+    return function (dispatch) {
+
+        dispatch({
+            type: PASSWORD_CHANGE_REQUEST
+        });
+
+        if (passwordrepeat != password) {
             dispatch({
-                type: CANCEL_RESTORE_REQUEST
-            });
-    
+                type: PASSWORD_CHANGE_FAIL,
+                payload: 'Password confirmation error'
+            })
+        }
+        else {
             $.ajax({
                 method: 'PUT',
-                url: 'http://35.156.176.72/users/restore/' + code,
+                url: 'http://35.156.176.72/users/passwordchange/' + code,
+                data: { Password: password },
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 success: function () {
-    
+
                     dispatch({
-                        type: CANCEL_RESTORE_SUCCES
+                        type: PASSWORD_CHANGE_SUCCES
                     });
-                    
+
+                    dispatch({
+                        type: ROUTING,
+                        payload: {
+                            method: 'replace',
+                            nextUrl: '/signin'
+                        }
+                    })
+
                 },
                 error: function (result) {
-    
+
                     dispatch({
-                        type: CANCEL_RESTORE_FAIL,
+                        type: PASSWORD_CHANGE_FAIL,
                         payload: result.responseJSON.message
                     })
-    
+
                 }
             });
         }
     }
-
-export function handlePasswordChange(code, password) {
-        
-            return function (dispatch) {
-        
-                dispatch({
-                    type: PASSWORD_CHANGE_REQUEST
-                });
-        
-                $.ajax({
-                    method: 'PUT',
-                    url: 'http://35.156.176.72/users/passwordchange/' + code,
-                    data: { Password: password },
-                    contentType: 'application/x-www-form-urlencoded',
-                    dataType: 'json',
-                    success: function () {
-        
-                        dispatch({
-                            type: PASSWORD_CHANGE_SUCCES
-                        });
-                        
-                    },
-                    error: function (result) {
-        
-                        dispatch({
-                            type: PASSWORD_CHANGE_FAIL,
-                            payload: result.responseJSON.message
-                        })
-        
-                    }
-                });
-            }
-        }
+}
 
 export function showModal() {
     return (dispatch) => {

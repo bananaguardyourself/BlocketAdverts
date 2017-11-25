@@ -67,7 +67,6 @@ export default class Signup extends Component {
         }.bind(this), 400);
     }
 
-
     componentWillMount() {
         this.props.errorSet('');
         this.props.verifiedSet(false);
