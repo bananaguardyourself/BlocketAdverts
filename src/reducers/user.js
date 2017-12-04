@@ -97,8 +97,8 @@ export default function user(state = initialState, action) {
         case GET_USER_INFO_SUCCES:
             return {
                 ...state,
-                email: action.payload.user.email,
-                id: action.payload.user.id,
+                email: action.payload.email,
+                id: action.payload.id,
                 error: '',
                 isAuthenticated: true
             };
