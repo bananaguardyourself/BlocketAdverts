@@ -41,9 +41,11 @@ export default class Password extends Component {
 
     finishedPasswordChange() {
         setTimeout(function () {
-            this.OKSpan.textContent = 'Sign Up';
-            this.OKButton.className = 'button-link';            
-            this.OKButton.removeAttribute('disabled');
+            if (this.OKSpan) {
+                this.OKSpan.textContent = 'Restore';
+                this.OKButton.className = 'button-link';
+                this.OKButton.removeAttribute('disabled');
+            }
         }.bind(this), 400);
     }
 
