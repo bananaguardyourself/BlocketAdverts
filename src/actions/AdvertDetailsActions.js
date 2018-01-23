@@ -42,7 +42,7 @@ export function getAdvert(id) {
 
             $.ajax({
                 type: 'GET',
-                url: 'http://35.156.176.72/adverts/' + id,
+                url: 'http://18.195.13.194/adverts/' + id,
                 dataType: 'json',
                 headers: {'Authorization': tk},
                 success: function (response) {

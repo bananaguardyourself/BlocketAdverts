@@ -54,7 +54,7 @@ export function getAdverts() {
 
             $.ajax({
                 type: 'GET',
-                url: 'http://35.156.176.72/adverts',
+                url: 'http://18.195.13.194/adverts',
                 dataType: 'json',
                 headers: {'Authorization': tk},
                 success: function (response) {
@@ -118,14 +118,14 @@ export function addAdvert(link, successCallback, errorCallback) {
 
             $.ajax({
                 type: 'POST',
-                url: 'http://35.156.176.72/adverts?link=' + link,
+                url: 'http://18.195.13.194/adverts?link=' + link,
                 dataType: 'json',
                 headers: {'Authorization': tk},
                 success: function () {
 
                     $.ajax({
                         type: 'GET',
-                        url: 'http://35.156.176.72/adverts',
+                        url: 'http://18.195.13.194/adverts',
                         dataType: 'json',
                         headers: {'Authorization': tk},
                         success: function (response) {
@@ -219,7 +219,7 @@ export function deleteAdvert(id, errorCallback) {
 
             $.ajax({
                 method: 'DELETE',
-                url: 'http://35.156.176.72/adverts/' + id,
+                url: 'http://18.195.13.194/adverts/' + id,
                 headers: {'Authorization': tk},
                 success: function () {
                     dispatch({
@@ -294,7 +294,7 @@ export function updateAdvert(id, successCallback, errorCallback) {
 
             $.ajax({
                 method: 'PUT',
-                url: 'http://35.156.176.72/adverts/' + id,
+                url: 'http://18.195.13.194/adverts/' + id,
                 headers: {'Authorization': tk},
                 success: function (result) {
 
