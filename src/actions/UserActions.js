@@ -38,6 +38,8 @@ import {
 import cookie from 'react-cookie'
 import $ from 'jquery';
 
+var Config = require('Config');
+
 export function errorSet(error) {
 
     return function (dispatch) {
@@ -55,7 +57,7 @@ export function verifiedSet(verified) {
         if (verified) {
             $.ajax({
                 type: 'POST',
-                url: 'http://18.195.13.194//users/verify',
+                url: Config.serverUrl + '//users/verify',
                 contentType: 'application/json',
                 data: '"' + verified + '"',
                 success: function (result) {
@@ -94,7 +96,7 @@ export function handleSignin(email, password, errorCallback) {
 
         $.ajax({
             type: 'POST',
-            url: 'http://18.195.13.194/users/signin',
+            url: Config.serverUrl + '/users/signin',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({ Email: email, Password: password }),
@@ -153,7 +155,7 @@ export function handleSignup(email, password, passwordrepeat, errorCallback) {
         else {
             $.ajax({
                 type: 'POST',
-                url: 'http://18.195.13.194/users/signup',
+                url: Config.serverUrl + '/users/signup',
                 contentType: 'application/json',
                 dataType: 'json',
                 data: JSON.stringify({ Email: email, Password: password }),
@@ -248,7 +250,7 @@ export function getUserInfo() {
 
             $.ajax({
                 type: 'GET',
-                url: 'http://18.195.13.194/users/userinfo',
+                url: Config.serverUrl + '/users/userinfo',
                 dataType: 'json',
                 headers: { 'Authorization': tk },
                 success: function (response) {
@@ -295,7 +297,7 @@ export function getUserRestoreInfo(restoreCode) {
 
         $.ajax({
             type: 'GET',
-            url: 'http://18.195.13.194/users/userinfo/' + restoreCode,
+            url: Config.serverUrl + '/users/userinfo/' + restoreCode,
             dataType: 'json',
             success: function (response) {
                 dispatch({
@@ -328,7 +330,7 @@ export function verifyAnonimity() {
         if (tk) {
             $.ajax({
                 type: 'GET',
-                url: 'http://18.195.13.194/users/userinfo/',
+                url: Config.serverUrl + '/users/userinfo/',
                 dataType: 'json',
                 headers: { 'Authorization': tk },
                 success: function (response) {
@@ -381,7 +383,7 @@ export function handleRestore(email) {
 
         $.ajax({
             method: 'POST',
-            url: 'http://18.195.13.194/users/restore?email=' + email,            
+            url: Config.serverUrl + '/users/restore?email=' + email,            
             success: function () {
 
                 dispatch({
@@ -420,7 +422,7 @@ export function cancelRestore(code) {
 
         $.ajax({
             method: 'PUT',
-            url: 'http://18.195.13.194/users/restore/' + code,
+            url: Config.serverUrl + '/users/restore/' + code,
             contentType: 'application/json',
             dataType: 'json',
             success: function () {
@@ -459,7 +461,7 @@ export function handlePasswordChange(code, password, passwordrepeat) {
         else {
             $.ajax({
                 method: 'PUT',
-                url: 'http://18.195.13.194/users/passwordchange/' + code,
+                url: Config.serverUrl + '/users/passwordchange/' + code,
                 data: JSON.stringify({ Password: password }),
                 contentType: 'application/json',
                 dataType: 'json',

@@ -14,6 +14,8 @@ import {
 import $ from 'jquery';
 import cookie from 'react-cookie'
 
+var Config = require('Config')
+
 export function getAdvert(id) {
 
     return (dispatch) => {
@@ -42,7 +44,7 @@ export function getAdvert(id) {
 
             $.ajax({
                 type: 'GET',
-                url: 'http://18.195.13.194/adverts/' + id,
+                url: Config.serverUrl + '/adverts/' + id,
                 dataType: 'json',
                 headers: {'Authorization': tk},
                 success: function (response) {
