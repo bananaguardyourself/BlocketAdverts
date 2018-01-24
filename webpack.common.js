@@ -1,12 +1,6 @@
 var webpack = require('webpack');
 
-module.exports = {
-    entry: [
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080/',
-        'babel-polyfill',
-        './index.js'],
-
+module.exports = {    
     output: {
         filename: 'bundle.js',
         publicPath: ''
@@ -32,9 +26,5 @@ module.exports = {
 
     externals: {
         'Config': JSON.stringify(require('./config.json'))
-      },
-
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+      }    
 }
